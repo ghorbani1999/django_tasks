@@ -17,5 +17,7 @@ def edit_task(request,id):
     return render(request,'edit_task.html')
 
 def dashboard(request):
-    return render(request,'dashboard.html')        
+    return render(request,'dashboard.html')  
+def create_task(request):
+    return render(request,'create_task.html)
 # Create your views here.
