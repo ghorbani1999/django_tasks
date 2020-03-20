@@ -9,15 +9,20 @@ def list_tasks(request):
     }
     return render(request,'list.html',contex)
 
+
 def show_task(request,id):
     contex = {'id' : id }
     return render(request,'show_task.html',contex)
 
+
 def edit_task(request,id):
     return render(request,'edit_task.html')
 
+
 def dashboard(request):
     return render(request,'dashboard.html')  
+
+
 def create_task(request):
     return render(request,'create_task.html')
 # Create your views here.
