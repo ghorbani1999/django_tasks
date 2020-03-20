@@ -43,12 +43,12 @@
                                     <i class="material-icons text-danger">clear</i> {% endif %}
                                 </td>
                                 <td>{{ tasks_object.created_at|date:"Y-m-d" }}</td>
-                                <td>
+                                <td align="center">
                                 <a href="{% url 'edit_task' tasks_object.id %}">
                                 <i class="material-icons">edit</i>
                                 </a>
                                 </td>
-                                <td>
+                                <td align="center">
                                 <a href="#">
                                 <i class="material-icons text-danger">delete</i>
                                 </a>
