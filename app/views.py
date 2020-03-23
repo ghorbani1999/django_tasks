@@ -1,5 +1,8 @@
 from django.shortcuts import render
 from app import models
+from django.http import HttpResponse
+from .forms import taskform
+
 
 def list_tasks(request):
     tasks_objects = models.tasks.objects.all()
@@ -24,5 +27,13 @@ def dashboard(request):
 
 
 def create_task(request):
-    return render(request,'create_task.html')
+    if request.method == 'POST':
+        form = taskform(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponse("succsess")
+        else:
+            return HttpResponse("validation failded")    
+    if request.method == 'GET':
+        return render(request,'create_task.html')
 # Create your views here.

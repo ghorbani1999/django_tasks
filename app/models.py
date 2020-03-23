@@ -4,7 +4,8 @@ class tasks(models.Model):
     title = models.CharField(max_length=250)
     description = models.TextField()
     done = models.BooleanField(default=0)
-    created_at = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(auto_now_add=True , auto_now=False)
+    updated_at = models.DateTimeField(auto_now=True,auto_now_add=False)
     def __str__(self):
         return self.title
 

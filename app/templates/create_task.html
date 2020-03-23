@@ -7,12 +7,13 @@
                 <p class="card-category">عنوان و توضیحات وضیفه ی جدید را وارد کنید</p>
             </div>
             <div class="card-body">
-                <form>
+                <form method="POST">
+                    {% csrf_token %}
                     <div class="row justify-content-center">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="bmd-label-floating">عنوان</label>
-                                <input type="text" class="form-control">
+                                <input type="text" class="form-control" required maxlength="250" name="title">
                             </div>
                         </div>  
                     </div>
@@ -22,7 +23,7 @@
                                 
                                 <div class="form-group">
                                     <label class="bmd-label-floating">توضیحات</label>
-                                    <textarea class="form-control" rows="5"></textarea>
+                                    <textarea class="form-control" rows="5" required name="description"></textarea>
                                 </div>
                             </div>
                         </div>
