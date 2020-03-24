@@ -1,7 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render , redirect
 from app import models
 from django.http import HttpResponse
 from .forms import taskform
+from django.contrib import messages
 
 
 def list_tasks(request):
@@ -31,9 +32,11 @@ def create_task(request):
         form = taskform(request.POST)
         if form.is_valid():
             form.save()
-            return HttpResponse("succsess")
+            messages.success(request, 'وظیفه ی جدید در سیستم ثبت شد')
+            return redirect('list')
         else:
-            return HttpResponse("validation failded")    
+            messages.error(request, 'validation failded')
+            return redirect('list')   
     if request.method == 'GET':
         return render(request,'create_task.html')
 # Create your views here.

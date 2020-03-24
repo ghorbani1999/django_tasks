@@ -140,10 +140,29 @@
             </nav>
             <!-- End Navbar -->
             <div class="content">
+                
+                {% if messages %}
+                    {% for message in messages %}
+                    <div class="alert alert-{% if message.tags == 'success'%}success
+                    {% elif message.tags == 'error' %}danger 
+                    {% endif %}">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <i class="material-icons">close</i>
+                        </button>
+                        <span>
+                            {{ message }}
+                        </span>
+                    </div>
+                    {% endfor %}
+                {% endif %}
 
-				{# content must be placed here #}
-				{% block content %}
+
+                {# content must be placed here #}
+                
+                {% block content %}
+                
                 {% endblock %}
+
 				{# end of contents #}
 
                 <hr>
