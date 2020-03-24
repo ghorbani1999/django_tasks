@@ -1,6 +1,5 @@
-{% extends 'master.html' %}
+{% extends 'master.html' %} 
 {% block content %}
-
 <div class="row">
     <div class="col-md-12">
         <div class="card">
@@ -35,7 +34,7 @@
                             {% for tasks_object in tasks_objects %}
                             <tr>
                                 <td>{{ tasks_object.id }}</td>
-                                <td><a href= "{% url 'show_task' tasks_object.id %}">{{ tasks_object.title }}</a></td>
+                                <td><a href="{% url 'show_task' tasks_object.id %}">{{ tasks_object.title }}</a></td>
                                 <td>{{ tasks_object.description }}</td>
                                 <td>
                                     {% if tasks_object.done %}
@@ -44,14 +43,14 @@
                                 </td>
                                 <td>{{ tasks_object.created_at|date:"Y-m-d" }}</td>
                                 <td align="center">
-                                <a href="{% url 'edit_task' tasks_object.id %}">
-                                <i class="material-icons">edit</i>
-                                </a>
+                                    <a href="{% url 'edit_task' tasks_object.id %}">
+                                        <i class="material-icons">edit</i>
+                                    </a>
                                 </td>
                                 <td align="center">
-                                <a href="#">
-                                <i class="material-icons text-danger">delete</i>
-                                </a>
+                                    <a href="#">
+                                        <i class="material-icons text-danger">delete</i>
+                                    </a>
                                 </td>
                             </tr>
                             {% endfor %}
@@ -59,17 +58,47 @@
                     </table>
                 </div>
             </div>
-            
-            <a target="_blank" href="{% url 'create_task' %}" class="btn btn-round btn-fill btn-info"><h4>ایجاد وظیفه ی جدید</h4><div class="ripple-container">
-              
-            </div>
-            <i class="material-icons">add</i>
+
+            <a target="_blank" href="{% url 'create_task' %}" class="btn btn-round btn-fill btn-info">
+                <h4>ایجاد وظیفه ی جدید</h4>
+                <div class="ripple-container">
+
+                </div>
+                <i class="material-icons">add</i>
             </a>
             <hr>
-      
-                </div>
-            </footer>
-        </div>
-    </div>
 
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center">
+                    {% if page.has_previous %}
+
+                    <li class="page-item">
+                        <a class="page-link" href="{% url 'list' %}?page={{ page.previous_page_number }}" tabindex="-1">قبلی</a>
+                    </li>
+                    {% else %}
+                    <li class="page-item disabled">
+                        <a class="page-link" href="" tabindex="-1">قبلی</a>
+                    </li>
+                    {% endif %} {% for page in paginator.page_range %}
+
+                    <li class="page-item {% if current_page == page %}active{% endif %}">
+                        <a class="page-link" href="{% url 'list' %}?page={{ page }}">{{ page }}</a>
+                    </li>
+
+                    {% endfor %} {% if page.has_next %}
+
+                    <li class="page-item">
+                        <a class="page-link" href="{% url 'list' %}?page={{ page.next_page_number }}">بعدی</a>
+                    </li>
+                    {% else %}
+                    <li class="page-item disabled">
+                        <a class="page-link" href="">بعدی</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+
+    </div>
+</div>
 {% endblock content %}

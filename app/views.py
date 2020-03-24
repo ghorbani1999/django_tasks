@@ -3,13 +3,20 @@ from app import models
 from django.http import HttpResponse
 from .forms import taskform
 from django.contrib import messages
+from django.core.paginator import Paginator
 
 
 def list_tasks(request):
-    tasks_objects = models.tasks.objects.all()
+    paginator = Paginator(models.tasks.objects.all(),4)
+    current_page = int(request.GET.get('page') or 1 )
+    page = paginator.page(current_page)
+    tasks_objects = page.object_list
     count = models.tasks.objects.count()
     contex = {'tasks_objects':tasks_objects ,
     'count':count,
+    'paginator': paginator,
+    'current_page' : current_page,
+    'page':page,
     }
     return render(request,'list.html',contex)
 
