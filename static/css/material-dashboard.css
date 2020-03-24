@@ -18819,5 +18819,15 @@ Copyright (c) 2015 Daniel Eden
     display: none !important;
   }
 }
-
+.page-item .page-link {
+  margin: 0px 5px;
+  border-radius : 0.25rem;
+}
+.page-item:not(:first-child):not(:last-child) .page-link {
+  border-radius: 50%;
+}
+.page-item.active .page-link {
+  background-color: #9c27b0;
+  border-color: #9c27b0;
+}
 /*# sourceMappingURL=dashboard-free.css.map */
