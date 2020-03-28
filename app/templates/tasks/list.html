@@ -43,14 +43,17 @@
                                 </td>
                                 <td>{{ tasks_object.created_at|date:"Y-m-d" }}</td>
                                 <td align="center">
-                                    <a href="{% url 'edit_task' tasks_object.id %}">
+                                    <a href="{% url 'edit_task' tasks_object.id %}" class="btn btn-outline-success btn-sm">
                                         <i class="material-icons">edit</i>
                                     </a>
                                 </td>
                                 <td align="center">
-                                    <a href="#">
-                                        <i class="material-icons text-danger">delete</i>
-                                    </a>
+                                    <form action="{% url 'delete_task' tasks_object.id %}" method="POST">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-outline-danger btn-sm" onclick="return confirm('Are you sure?');">
+                                            <i class="material-icons text-danger">delete</i>
+                                        </button>
+                                    </form>
                                 </td>
                             </tr>
                             {% endfor %}
@@ -70,7 +73,7 @@
 
             <!-- paginator of the table -->
 
-            {% include "paginator.html" %}
+            {% include "paginator/paginator.html" %}
             
                <!-- end of paginator  -->
         </div>
