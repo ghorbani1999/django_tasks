@@ -1,9 +1,10 @@
-from django.shortcuts import render , redirect
-from app import models
+from django.shortcuts import render , redirect , get_object_or_404  
+from app import models                      
 from django.http import HttpResponse
 from .forms import taskform
 from django.contrib import messages
 from django.core.paginator import Paginator
+
 
 
 def list_tasks(request):
@@ -22,7 +23,8 @@ def list_tasks(request):
 
 
 def show_task(request,id):
-    contex = {'id' : id }
+    task = get_object_or_404(models.tasks , id = id)
+    contex = {'task':task}
     return render(request,'show_task.html',contex)
 
 

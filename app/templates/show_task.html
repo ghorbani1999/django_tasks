@@ -1,4 +1,23 @@
 {% extends "master.html" %}
 {% block content %}
-task number of {{ id }}
-{% endblock content %}
+    <div class="card">
+        <div class="card-header card-header-primary">
+			<h4 class="card-title "> {{task.title}} </h4>
+		</div>
+        <div class="card-body">
+            <p> {{task.description}} </p>
+            <hr>
+            <div class="text-left">
+                <a href="#" class="btn btn-info btn-round">
+                    <i class="material-icons mr-2">check</i> علامت زدن به عنوان انجام شده
+                </a>
+                <a href="{% url 'edit_task' task.id %}" class="btn btn-success btn-round">
+                    <i class="material-icons mr-2">edit</i> ویرایش
+                </a>
+                <a href="#" class="btn btn-danger btn-round">
+                    <i class="material-icons mr-2">delete</i> حذف
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
