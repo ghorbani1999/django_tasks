@@ -1,0 +1,47 @@
+{% extends "master.html" %}
+{% block content %}
+
+        <div class="card">
+            <div class="card-header card-header-primary">
+                <h4 class="card-title">ایجاد شخص  جدید</h4>
+                <p class="card-category">عنوان و توضیحات وضیفه ی جدید را وارد کنید</p>
+            </div>
+            <div class="card-body">
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="row justify-content-center">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="bmd-label-floating">عنوان</label>
+                                <input type="text" class="form-control" required maxlength="250" name="name" value="{{ person.name }}">
+                            </div>
+                        </div>  
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <select class="form-contril" name="sex">
+                                    <option value="M" {% if person.sex == 'M' %}
+                                        selected
+                                    {% endif %}>مرد</option>
+                                    <option value="F" {% if person.sex == 'F' %}
+                                        selected
+                                    {% endif %}>زن</option>
+                                    <option value="O" {% if person.sex == 'O' %}
+                                        selected
+                                    {% endif %}>سایر</option>
+                                </select>                           
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-md-2">
+                            
+                            <button type="submit" class="btn btn-primary btn-block">ذخیره</button>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </form>
+            </div>
+        </div>
+{% endblock content %}

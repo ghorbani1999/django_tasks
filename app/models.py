@@ -14,4 +14,13 @@ class person(models.Model):
     sex_choices = [('M','Male'),('F','Female'),('O','others')]
     sex = models.CharField(choices=sex_choices,max_length=1)
 
+    def sex_name(self):
+        if self.sex == 'M' :
+             return 'مرد'
+        elif self.sex == 'F': 
+             return 'زن'
+        elif self.sex == 'O' :
+             return 'سایر'
+
+
 # Create your models here.

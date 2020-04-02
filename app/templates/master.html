@@ -69,8 +69,8 @@
                             <p> لیست وظایف </p>
                         </a>
                     </li>
-                    <li class="nav-item ">
-                        <a class="nav-link" href="#">
+                    <li class="nav-item {% if request.resolver_match.url_name == 'list_persons' %} active {% endif %}">
+                        <a class="nav-link" href="{% url 'list_persons' %}">
                             <i class="material-icons">group</i>
                             <p> لیست افراد </p>
                         </a>

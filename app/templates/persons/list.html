@@ -4,10 +4,12 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-header card-header-primary">
-                <h4 class="card-title ">لیست وظایف </h4>
-                <p class="card-category"> {{ count }} وظیفه پیدا شد</p>
+                <h4 class="card-title ">لیست افراد </h4>
+                <p class="card-category"> {{count}} فرد پیدا شد</p>
             </div>
             <div class="card-body">
+                {% if count %}
+
                 <div class="table-responsive">
                     <table class="table table-bordered">
                         <thead class=" text-primary">
@@ -15,40 +17,28 @@
                                 ردیف
                             </th>
                             <th>
-                                عنوان
+                                نام
                             </th>
                             <th>
-                                توضیحات
-                            </th>
-                            <th>
-                                وضعیت
-                            </th>
-                            <th>
-                                تاریخ
+                                جنسیت
                             </th>
                             <th colspan="2">
                                 عملیات
                             </th>
                         </thead>
                         <tbody>
-                            {% for tasks_object in tasks_objects %}
+                            {% for person_object in persons_objects %}
                             <tr>
-                                <td>{{ tasks_object.id }}</td>
-                                <td><a href="{% url 'show_task' tasks_object.id %}">{{ tasks_object.title }}</a></td>
-                                <td>{{ tasks_object.description }}</td>
-                                <td>
-                                    {% if tasks_object.done %}
-                                    <i class="material-icons text-success">done</i> {% else %}
-                                    <i class="material-icons text-danger">clear</i> {% endif %}
-                                </td>
-                                <td>{{ tasks_object.created_at|date:"Y-m-d" }}</td>
+                                <td>{{ person_object.id }}</td>
+                                <td>{{ person_object.name }}</td>
+                                <td>{{ person_object.sex_name }}</td>
                                 <td align="center">
-                                    <a href="{% url 'edit_task' tasks_object.id %}" class="btn btn-outline-success btn-sm">
+                                    <a href="{% url 'edit_person' person_object.id %}" class="btn btn-outline-success btn-sm">
                                         <i class="material-icons">edit</i>
                                     </a>
                                 </td>
                                 <td align="center">
-                                    <form action="{% url 'delete_task' tasks_object.id %}" method="POST">
+                                    <form action="{% url 'delete_person' person_object.id %}" method="POST">
                                         {% csrf_token %}
                                         <button type="submit" class="btn btn-outline-danger btn-sm" onclick="return confirm('Are you sure?');">
                                             <i class="material-icons text-danger">delete</i>
@@ -60,10 +50,16 @@
                         </tbody>
                     </table>
                 </div>
+                 {% else %}
+                 <div class="alert alert-warning">
+                    <i class="material-icons text-white mr-2">warning</i>
+                     موردی یافت نشد
+                 </div> 
+                {% endif %}
             </div>
 
-            <a href="{% url 'create_task' %}" class="btn btn-round btn-fill btn-info">
-                <h4>ایجاد وظیفه ی جدید</h4>
+            <a href="{% url 'create_person' %}" class="btn btn-round btn-fill btn-info">
+                <h4>اضافه کردن فرد جدید</h4>
                 <div class="ripple-container">
 
                 </div>
