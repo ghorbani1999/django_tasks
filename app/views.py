@@ -1,7 +1,7 @@
 from django.shortcuts import render , redirect , get_object_or_404  
 from app import models                      
 from django.http import HttpResponse
-from .forms import taskform , personform
+from .forms import taskform , personform ,personform
 from django.contrib import messages
 from django.core.paginator import Paginator
 
@@ -27,8 +27,25 @@ def list_tasks(request):
 
 def show_task(request,id):
     task = get_object_or_404(models.tasks , id = id)
-    contex = {'task':task}
+    persons = models.person.objects.all()
+    contex = {'task':task , 'persons':persons}
     return render(request,'tasks/show_task.html',contex)
+
+
+
+def assign(request,id):
+        task = get_object_or_404(models.tasks , pk=id)
+        person_id = request.POST.get('person_id')
+        person = get_object_or_404(models.person , pk= person_id)
+        try:
+            task.assigned = person
+            task.save()
+            messages.success(request,"وظیفه به شخص مورد نظر الحاق شد")
+            return redirect('list')
+        except:
+            messages.error(request,"validation failed")
+            return redirect('list')     
+            
 
 
 def edit_task(request,id):
@@ -85,6 +102,11 @@ def list_persons(request):
     return render(request,'persons/list.html',contex)
 
 
+
+def show_person(request,id):
+    person = get_object_or_404(models.person , id = id)
+    contex = {'person':person }
+    return render(request,'persons/show_person.html',contex)
 
 
 def edit_person(request,id):

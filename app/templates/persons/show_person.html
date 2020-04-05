@@ -1,0 +1,32 @@
+{% extends "master.html" %}
+{% block content %}
+    <div class="card">
+        <div class="card-header card-header-primary">
+			<h4 class="card-title "> {{person.name}} </h4>
+		</div>
+        <div class="card-body p-5">
+            <h4>وظایف الحاق شده به این شخص</h4>
+            <hr>
+            {% if person.tasks_set.all.count %}
+              
+            <ul>
+                {% for task in person.tasks_set.all %}
+                    <li><a href="{% url 'show_task' task.id %}">{{ task.title }}</a></li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <div class="alert alert-info mt-3">هیچ وظیفه ای به این شخص الحاق نشده</div>
+            {% endif %}
+
+            
+            <div class="text-left">
+                <a href="{% url 'edit_person' person.id %}" class="btn btn-success btn-round">
+                    <i class="material-icons mr-2">edit</i> ویرایش
+                </a>
+                <a href="#" class="btn btn-danger btn-round">
+                    <i class="material-icons mr-2">delete</i> حذف
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

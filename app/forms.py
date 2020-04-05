@@ -8,3 +8,4 @@ class personform(forms.ModelForm):
     class Meta :
         model = person
         fields = ['name' , 'sex']
+ 

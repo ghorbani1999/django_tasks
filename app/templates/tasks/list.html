@@ -18,6 +18,9 @@
                                 عنوان
                             </th>
                             <th>
+                                الحاق شده به
+                            </th>
+                            <th>
                                 توضیحات
                             </th>
                             <th>
@@ -35,6 +38,15 @@
                             <tr>
                                 <td>{{ tasks_object.id }}</td>
                                 <td><a href="{% url 'show_task' tasks_object.id %}">{{ tasks_object.title }}</a></td>
+                                <td>
+                                    {% if tasks_object.assigned %}
+                                      
+                                    <a href="{% url 'show_person' tasks_object.assigned.id %}">{{ tasks_object.assigned.name }}</a>
+                                    {% else %}
+                                    <em class="text-muted">الحاق نشده</em>
+                                    {% endif %}
+                                
+                                </td>
                                 <td>{{ tasks_object.description }}</td>
                                 <td>
                                     {% if tasks_object.done %}

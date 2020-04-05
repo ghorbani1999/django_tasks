@@ -7,6 +7,26 @@
         <div class="card-body">
             <p> {{task.description}} </p>
             <hr>
+            <form class="row justify-content-center" action="{% url 'assign' task.id %}" method="POST">
+                {% csrf_token %}
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="person"> شخص مورد نظر را انتخاب کنید </label>
+                        <select class="form-control" name="person_id" id="person" required>
+                            <option value=""> -- انتخاب کنید -- </option>
+                            {% for person in persons  %}
+                                <option value="{{person.id}}" {% ifequal person.id task.assigned_id %} selected {% endifequal %} >
+                                    {{person.name}}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="w-100 my-2"></div>
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-primary btn-block"> الحاق کردن </button>
+                </div>
+            </form>
             <div class="text-left">
                 <a href="#" class="btn btn-info btn-round">
                     <i class="material-icons mr-2">check</i> علامت زدن به عنوان انجام شده

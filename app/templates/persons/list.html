@@ -30,7 +30,7 @@
                             {% for person_object in persons_objects %}
                             <tr>
                                 <td>{{ person_object.id }}</td>
-                                <td>{{ person_object.name }}</td>
+                                <td><a href="{% url 'show_person' person_object.id %}">{{ person_object.name }}</a></td>
                                 <td>{{ person_object.sex_name }}</td>
                                 <td align="center">
                                     <a href="{% url 'edit_person' person_object.id %}" class="btn btn-outline-success btn-sm">
